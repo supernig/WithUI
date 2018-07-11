@@ -1,0 +1,16 @@
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\InventoryUI.exe.config
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\InventoryUI.exe
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\InventoryUI.pdb
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\InventoryUI.xml
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\Bunifu_UI_v1.5.3.dll
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.vbprojAssemblyReference.cache
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.Form1.resources
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.Resources.resources
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.vbproj.GenerateResource.cache
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.vbproj.CoreCompileInputs.cache
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.vbproj.CopyComplete
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.exe
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.xml
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.pdb
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\bin\Debug\MySql.Data.dll
+C:\Users\A8-7600k\source\repos\InventoryUI\InventoryUI\obj\Debug\InventoryUI.Form2.resources
