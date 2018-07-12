@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,62 +20,18 @@ Partial Class Form2
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.datagrid2 = New Bunifu.Framework.UI.BunifuCustomDataGrid()
-        Me.Column1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.BunifuFlatButton3 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.BunifuFlatButton4 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.BunifuFlatButton2 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.BunifuFlatButton1 = New Bunifu.Framework.UI.BunifuFlatButton()
-        CType(Me.datagrid2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.BunifuCustomDataGrid1 = New Bunifu.Framework.UI.BunifuCustomDataGrid()
+        Me.Column1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        CType(Me.BunifuCustomDataGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'datagrid2
-        '
-        Me.datagrid2.AllowUserToAddRows = False
-        Me.datagrid2.AllowUserToDeleteRows = False
-        Me.datagrid2.AllowUserToResizeColumns = False
-        Me.datagrid2.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.datagrid2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.datagrid2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.datagrid2.BackgroundColor = System.Drawing.Color.Gainsboro
-        Me.datagrid2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.datagrid2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Century Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.datagrid2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.datagrid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.datagrid2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1})
-        Me.datagrid2.DoubleBuffered = True
-        Me.datagrid2.EnableHeadersVisualStyles = False
-        Me.datagrid2.HeaderBgColor = System.Drawing.Color.DarkGray
-        Me.datagrid2.HeaderForeColor = System.Drawing.Color.Black
-        Me.datagrid2.Location = New System.Drawing.Point(32, 100)
-        Me.datagrid2.Name = "datagrid2"
-        Me.datagrid2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.datagrid2.RowHeadersVisible = False
-        Me.datagrid2.Size = New System.Drawing.Size(1092, 376)
-        Me.datagrid2.TabIndex = 1
-        '
-        'Column1
-        '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column1.DataPropertyName = "data1"
-        Me.Column1.FalseValue = "0"
-        Me.Column1.HeaderText = "Action"
-        Me.Column1.Name = "Column1"
-        Me.Column1.TrueValue = "1"
         '
         'BunifuFlatButton3
         '
@@ -217,28 +173,71 @@ Partial Class Form2
         Me.BunifuFlatButton1.Textcolor = System.Drawing.Color.White
         Me.BunifuFlatButton1.TextFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
+        'BunifuCustomDataGrid1
+        '
+        Me.BunifuCustomDataGrid1.AllowUserToAddRows = False
+        Me.BunifuCustomDataGrid1.AllowUserToDeleteRows = False
+        Me.BunifuCustomDataGrid1.AllowUserToResizeColumns = False
+        Me.BunifuCustomDataGrid1.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.BunifuCustomDataGrid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.BunifuCustomDataGrid1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BunifuCustomDataGrid1.BackgroundColor = System.Drawing.Color.Gainsboro
+        Me.BunifuCustomDataGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.BunifuCustomDataGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Century Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.BunifuCustomDataGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.BunifuCustomDataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.BunifuCustomDataGrid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1})
+        Me.BunifuCustomDataGrid1.DoubleBuffered = True
+        Me.BunifuCustomDataGrid1.EnableHeadersVisualStyles = False
+        Me.BunifuCustomDataGrid1.HeaderBgColor = System.Drawing.Color.DarkGray
+        Me.BunifuCustomDataGrid1.HeaderForeColor = System.Drawing.Color.Black
+        Me.BunifuCustomDataGrid1.Location = New System.Drawing.Point(32, 100)
+        Me.BunifuCustomDataGrid1.Name = "BunifuCustomDataGrid1"
+        Me.BunifuCustomDataGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.BunifuCustomDataGrid1.RowHeadersVisible = False
+        Me.BunifuCustomDataGrid1.Size = New System.Drawing.Size(1092, 376)
+        Me.BunifuCustomDataGrid1.TabIndex = 9
+        '
+        'Column1
+        '
+        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column1.DataPropertyName = "data1"
+        Me.Column1.FalseValue = "0"
+        Me.Column1.HeaderText = "Action"
+        Me.Column1.Name = "Column1"
+        Me.Column1.TrueValue = "1"
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1156, 577)
+        Me.Controls.Add(Me.BunifuCustomDataGrid1)
         Me.Controls.Add(Me.BunifuFlatButton3)
         Me.Controls.Add(Me.BunifuFlatButton4)
         Me.Controls.Add(Me.BunifuFlatButton2)
         Me.Controls.Add(Me.BunifuFlatButton1)
-        Me.Controls.Add(Me.datagrid2)
         Me.Name = "Form2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form2"
-        CType(Me.datagrid2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BunifuCustomDataGrid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents datagrid2 As Bunifu.Framework.UI.BunifuCustomDataGrid
-    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
     Friend WithEvents BunifuFlatButton3 As Bunifu.Framework.UI.BunifuFlatButton
     Friend WithEvents BunifuFlatButton4 As Bunifu.Framework.UI.BunifuFlatButton
     Friend WithEvents BunifuFlatButton2 As Bunifu.Framework.UI.BunifuFlatButton
     Friend WithEvents BunifuFlatButton1 As Bunifu.Framework.UI.BunifuFlatButton
+    Friend WithEvents BunifuCustomDataGrid1 As Bunifu.Framework.UI.BunifuCustomDataGrid
+    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
 End Class

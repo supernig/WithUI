@@ -8,9 +8,50 @@ Public Class Form1
         If a = Nothing Then
             MsgBox("No selected rows.", MsgBoxStyle.Exclamation, "Error")
         Else
-            Dim box = New Form2(a)
-            box.Show()
-            Me.Hide()
+            Panel1.Visible = True
+            Using con As New MySqlConnection(myConnectionString)
+                Using cmd As New MySql.Data.MySqlClient.MySqlCommand("SELECT itemcontent.id,itemcontent.modelnumber,tag.description FROM items left outer join itemcontent on itemcontent.itemID = items.id left outer join tag on itemcontent.tagID = tag.id where items.id =  " & a, conn)
+                    cmd.CommandType = CommandType.Text
+                    Using sda As New MySqlDataAdapter(cmd)
+                        Using dt As New DataTable()
+                            sda.Fill(dt)
+                            datagrid2.DataSource = dt
+                            datagrid2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.Fill
+                            datagrid2.Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            datagrid2.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            datagrid2.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            datagrid2.Columns(0).HeaderCell.Value = "Action"
+                            datagrid2.Columns(1).HeaderCell.Value = "ID"
+                            datagrid2.Columns(2).HeaderCell.Value = "Model Number"
+                            datagrid2.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            datagrid2.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            '  BunifuCustomDataGrid1.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            'BunifuCustomDataGrid1.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            ' BunifuCustomDataGrid1.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                            '  BunifuCustomDataGrid1.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                            Dim recordcount As Int32
+                            Using con2 As New MySqlConnection(myConnectionString)
+                                Using cmd3 As New MySqlCommand("SELECT COUNT(itemcontent.id) from items left join itemcontent on itemcontent.itemID = items.id where  itemcontent.tagID = 1 AND items.id = " & a, conn)
+                                    cmd3.CommandType = CommandType.Text
+                                    If IsDBNull(cmd3) Then
+                                        MessageBox.Show("No record")
+                                    Else
+                                        Using sda1 As New MySqlDataAdapter(cmd3)
+                                            recordcount = Convert.ToInt32(cmd3.ExecuteScalar())
+                                            Label10.Text = "Available Stocks: " & recordcount.ToString
+
+
+
+                                        End Using
+                                    End If
+                                End Using
+                            End Using
+
+                        End Using
+                    End Using
+                End Using
+            End Using
         End If
     End Sub
 
@@ -87,7 +128,9 @@ Public Class Form1
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        If cb2.Items.Count > 0 Then
+            cb2.selectedIndex = 0    ' The first item has index 0 '
+        End If
         myConnectionString = "server=127.0.0.1;" _
             & "uid=root;" _
             & "pwd=root;" _
@@ -138,6 +181,24 @@ Public Class Form1
     Private Sub DataGridViewCheckBoxColumn_Uncheck()
         For Each row As DataGridViewRow In BunifuCustomDataGrid1.Rows
             Dim cell As DataGridViewCheckBoxCell = row.Cells("Column1")
+            cell.Value = cell.FalseValue
+        Next
+    End Sub
+
+    Dim c As String
+    Private Sub datagrid2_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles datagrid2.CellContentClick
+        If e.ColumnIndex = datagrid2.Columns("column2").Index Then
+            DataGridViewCheckBoxColumn_Uncheck1()
+            Dim cell As DataGridViewCheckBoxCell = datagrid2.Rows(e.RowIndex).Cells("column2")
+            cell.Value = cell.TrueValue
+            c = datagrid2.Rows(e.RowIndex).Cells(1).Value.ToString()
+
+        End If
+    End Sub
+
+    Private Sub DataGridViewCheckBoxColumn_Uncheck1()
+        For Each row As DataGridViewRow In datagrid2.Rows
+            Dim cell As DataGridViewCheckBoxCell = row.Cells("column2")
             cell.Value = cell.FalseValue
         Next
     End Sub
@@ -250,6 +311,162 @@ Public Class Form1
                 End If
             End Using
         End Using
+
+    End Sub
+
+    Private Sub TabPage1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub BunifuFlatButton10_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton10.Click
+        Panel1.Visible = False
+    End Sub
+
+    Private Sub BunifuFlatButton9_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton9.Click
+
+
+        If c = Nothing Then
+            MsgBox("No selected rows.", MsgBoxStyle.Exclamation, "Error")
+        Else
+            Using con As New MySqlConnection(myConnectionString)
+                Using cmd As New MySqlCommand("DELETE FROM itemcontent WHERE id =" + c, conn)
+                    cmd.CommandType = CommandType.Text
+
+                    If cmd.ExecuteNonQuery > 0 Then
+                        MsgBox("Successfully Deleted", MsgBoxStyle.Exclamation, "Process Complete")
+
+                        Using cmd1 As New MySql.Data.MySqlClient.MySqlCommand("SELECT itemcontent.id,itemcontent.modelnumber,tag.description FROM items left outer join itemcontent on itemcontent.itemID = items.id left outer join tag on itemcontent.tagID = tag.id where items.id =  " & a, conn)
+                            cmd1.CommandType = CommandType.Text
+                            Using sda As New MySqlDataAdapter(cmd1)
+                                Using dt As New DataTable()
+
+
+                                    sda.Fill(dt)
+                                    Dim bSource As New BindingSource()
+                                    bSource.DataSource = dt
+                                    datagrid2.DataSource = bSource
+                                    bSource.ResetBindings(False)
+                                    datagrid2.Refresh()
+                                    a = Nothing
+
+                                    Dim recordcount As Int32
+                                    Using con2 As New MySqlConnection(myConnectionString)
+                                        Using cmd3 As New MySqlCommand("SELECT COUNT(itemcontent.id) from items left join itemcontent on itemcontent.itemID = items.id where  itemcontent.tagID = 1 AND items.id = " & a, conn)
+                                            cmd3.CommandType = CommandType.Text
+                                            If IsDBNull(cmd3) Then
+                                                MessageBox.Show("No record")
+                                            Else
+                                                Using sda1 As New MySqlDataAdapter(cmd3)
+                                                    recordcount = Convert.ToInt32(cmd3.ExecuteScalar())
+                                                    Label10.Text = "Available Stocks: " & recordcount.ToString
+
+
+
+                                                End Using
+                                            End If
+                                        End Using
+                                    End Using
+                                End Using
+                            End Using
+                        End Using
+
+                    Else
+                        MsgBox("Something went wrong.", MsgBoxStyle.Exclamation, "Error")
+
+
+
+                    End If
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub BunifuFlatButton12_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton12.Click
+        BunifuGradientPanel1.Visible = True
+    End Sub
+
+    Private Sub BunifuCustomDataGrid2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles datagrid2.CellContentClick
+
+    End Sub
+
+    Private Sub BunifuGradientPanel2_Paint(sender As Object, e As PaintEventArgs) Handles BunifuGradientPanel2.Paint
+
+    End Sub
+
+    Private Sub BunifuDropdown1_onItemSelected(sender As Object, e As EventArgs) Handles cb2.onItemSelected
+
+    End Sub
+
+    Private Sub BunifuFlatButton14_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton14.Click
+        Using con1 As New MySqlConnection(myConnectionString)
+            Using cmd1 As New MySqlCommand("Select COUNT(*) FROM itemcontent where modelNumber ='" + BunifuMaterialTextbox1.Text + "' AND itemid=" & a, conn)
+                cmd1.CommandType = CommandType.Text
+
+                If cmd1.ExecuteScalar > 0 Then
+                    MsgBox("Item is already registered.", MsgBoxStyle.Exclamation, "Error")
+
+                Else
+
+                    If BunifuMaterialTextbox1.Text = "" Then
+
+                        MsgBox("Inputs cannot be blank", MsgBoxStyle.Exclamation, "Process Complete")
+                    Else
+                        Using con As New MySqlConnection(myConnectionString)
+                            Using cmd As New MySqlCommand(" INSERT INTO `db`.`itemcontent` (`itemid`,`tagID`,`modelNumber`,`StockID`) VALUES (" & a & "," & cb2.selectedIndex + 1 & ",'" & BunifuMaterialTextbox1.Text & "'," & a & ");", conn)
+                                cmd.CommandType = CommandType.Text
+
+                                If cmd.ExecuteNonQuery > 0 Then
+                                    MsgBox("Successfully added to database", MsgBoxStyle.Exclamation, "Process Complete")
+                                    BunifuGradientPanel1.Visible = False
+                                    BunifuMaterialTextbox1.Text = ""
+                                    Using cmd2 As New MySqlCommand("SELECT itemcontent.id,itemcontent.modelnumber,tag.description FROM items left outer join itemcontent on itemcontent.itemID = items.id left outer join tag on itemcontent.tagID = tag.id where items.id =" & a, conn)
+                                        cmd2.CommandType = CommandType.Text
+                                        Using sda As New MySqlDataAdapter(cmd2)
+                                            Using dt As New DataTable()
+                                                sda.Fill(dt)
+                                                datagrid2.DataSource = dt
+
+                                                datagrid2.Update()
+                                                Dim recordcount As Int32
+                                                Using con2 As New MySqlConnection(myConnectionString)
+                                                    Using cmd3 As New MySqlCommand("SELECT COUNT(itemcontent.id) from items left join itemcontent on itemcontent.itemID = items.id where  itemcontent.tagID = 1 AND items.id = " & a, conn)
+                                                        cmd3.CommandType = CommandType.Text
+                                                        If IsDBNull(cmd3) Then
+                                                            MessageBox.Show("No record")
+                                                        Else
+                                                            Using sda1 As New MySqlDataAdapter(cmd3)
+                                                                recordcount = Convert.ToInt32(cmd3.ExecuteScalar())
+                                                                Label10.Text = "Available Stocks: " & recordcount.ToString
+
+
+
+                                                            End Using
+                                                        End If
+                                                    End Using
+                                                End Using
+                                            End Using
+                                        End Using
+                                    End Using
+
+
+                                End If
+                            End Using
+                        End Using
+                    End If
+                End If
+
+
+
+
+            End Using
+        End Using
+    End Sub
+
+    Private Sub BunifuFlatButton13_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton13.Click
+        BunifuGradientPanel1.Visible = False
+    End Sub
+
+    Private Sub BunifuGradientPanel1_Paint(sender As Object, e As PaintEventArgs) Handles BunifuGradientPanel1.Paint
 
     End Sub
 End Class
