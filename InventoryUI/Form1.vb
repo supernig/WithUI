@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
+
 Public Class Form1
     Public a As String
     Dim b As String
@@ -186,13 +187,16 @@ Public Class Form1
     End Sub
 
     Dim c As String
+    Dim d As String
+    Dim f As String
     Private Sub datagrid2_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles datagrid2.CellContentClick
         If e.ColumnIndex = datagrid2.Columns("column2").Index Then
             DataGridViewCheckBoxColumn_Uncheck1()
             Dim cell As DataGridViewCheckBoxCell = datagrid2.Rows(e.RowIndex).Cells("column2")
             cell.Value = cell.TrueValue
             c = datagrid2.Rows(e.RowIndex).Cells(1).Value.ToString()
-
+            d = datagrid2.Rows(e.RowIndex).Cells(2).Value.ToString()
+            f = datagrid2.Rows(e.RowIndex).Cells(3).Value.ToString()
         End If
     End Sub
 
@@ -347,9 +351,10 @@ Public Class Form1
                                     datagrid2.DataSource = bSource
                                     bSource.ResetBindings(False)
                                     datagrid2.Refresh()
-                                    a = Nothing
+                                    c = Nothing
 
-                                    Dim recordcount As Int32
+
+                                    Dim counter As Integer
                                     Using con2 As New MySqlConnection(myConnectionString)
                                         Using cmd3 As New MySqlCommand("SELECT COUNT(itemcontent.id) from items left join itemcontent on itemcontent.itemID = items.id where  itemcontent.tagID = 1 AND items.id = " & a, conn)
                                             cmd3.CommandType = CommandType.Text
@@ -357,11 +362,8 @@ Public Class Form1
                                                 MessageBox.Show("No record")
                                             Else
                                                 Using sda1 As New MySqlDataAdapter(cmd3)
-                                                    recordcount = Convert.ToInt32(cmd3.ExecuteScalar())
-                                                    Label10.Text = "Available Stocks: " & recordcount.ToString
-
-
-
+                                                    counter = cmd3.ExecuteScalar()
+                                                    Label10.Text = "Available Stocks: " & counter.ToString
                                                 End Using
                                             End If
                                         End Using
@@ -389,7 +391,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub BunifuGradientPanel2_Paint(sender As Object, e As PaintEventArgs) Handles BunifuGradientPanel2.Paint
+    Private Sub BunifuGradientPanel2_Paint(sender As Object, e As PaintEventArgs) Handles pan3.Paint
 
     End Sub
 
@@ -468,5 +470,104 @@ Public Class Form1
 
     Private Sub BunifuGradientPanel1_Paint(sender As Object, e As PaintEventArgs) Handles BunifuGradientPanel1.Paint
 
+    End Sub
+
+    Private Sub BunifuFlatButton11_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton11.Click
+        If c = Nothing Then
+            MsgBox("No selected rows.", MsgBoxStyle.Exclamation, "Error")
+        Else
+            BunifuMaterialTextbox2.Text = d
+            Dim o As Integer
+            BunifuDropdown1.selectedIndex = 3
+            For Each BunifuDropdown1 As String In Me.BunifuDropdown1.Items
+                If BunifuDropdown1 = f Then
+
+                    Exit For
+                End If
+                o = o + 1
+            Next
+            BunifuDropdown1.selectedIndex = o
+
+
+            If pan3.Visible = False Then
+
+                pan3.Visible = True
+
+            Else
+                pan3.Visible = False
+
+            End If
+
+
+        End If
+    End Sub
+
+    Private Sub BunifuFlatButton16_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton16.Click
+        Using con1 As New MySqlConnection(myConnectionString)
+            Using cmd1 As New MySqlCommand("Select COUNT(*) FROM itemcontent where modelNumber ='" + BunifuMaterialTextbox2.Text + "'", conn)
+                cmd1.CommandType = CommandType.Text
+
+                If BunifuMaterialTextbox2.Text = "" Then
+                        MsgBox("Inputs cannot be blank.", MsgBoxStyle.Exclamation, "Process Complete")
+                    Else
+
+                        Using con As New MySqlConnection(myConnectionString)
+                        Using cmd As New MySqlCommand(" UPDATE `db`.`itemcontent` SET `modelNumber`='" + BunifuMaterialTextbox2.Text + "', tagID = " & BunifuDropdown1.selectedIndex + 1 & ", StockID = " & c & " WHERE (`id` = '" & c & "');", conn)
+                            cmd.CommandType = CommandType.Text
+
+                            If cmd.ExecuteNonQuery > 0 Then
+                                MsgBox("Successfully updated in the database", MsgBoxStyle.Exclamation, "Process Complete")
+                                Using cmd2 As New MySqlCommand("SELECT itemcontent.id,itemcontent.modelnumber,tag.description FROM items left outer join itemcontent on itemcontent.itemID = items.id left outer join tag on itemcontent.tagID = tag.id where items.id =" & a, conn)
+                                    cmd2.CommandType = CommandType.Text
+                                    Using sda As New MySqlDataAdapter(cmd2)
+                                        Using dt As New DataTable()
+                                            sda.Fill(dt)
+                                            datagrid2.DataSource = dt
+
+                                            datagrid2.Update()
+                                            Dim recordcount As Int32
+                                            Using con2 As New MySqlConnection(myConnectionString)
+                                                Using cmd3 As New MySqlCommand("SELECT COUNT(itemcontent.id) from items left join itemcontent on itemcontent.itemID = items.id where  itemcontent.tagID = 1 AND items.id = " & a, conn)
+                                                    cmd3.CommandType = CommandType.Text
+                                                    If IsDBNull(cmd3) Then
+                                                        MessageBox.Show("No record")
+                                                    Else
+                                                        Using sda1 As New MySqlDataAdapter(cmd3)
+                                                            recordcount = Convert.ToInt32(cmd3.ExecuteScalar())
+                                                            Label10.Text = "Available Stocks: " & recordcount.ToString
+
+
+
+                                                        End Using
+                                                    End If
+                                                End Using
+                                            End Using
+                                            pan3.Visible = False
+                                        End Using
+                                    End Using
+                                End Using
+                                pan2.Visible = False
+                                tb2.Text = ""
+
+                            End If
+                        End Using
+                    End Using
+                    End If
+
+            End Using
+        End Using
+    End Sub
+
+    Private Sub cb3_onItemSelected(sender As Object, e As EventArgs)
+
+
+    End Sub
+
+    Private Sub BunifuDropdown1_onItemSelected_1(sender As Object, e As EventArgs) Handles BunifuDropdown1.onItemSelected
+
+    End Sub
+
+    Private Sub BunifuFlatButton15_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton15.Click
+        pan3.Visible = False
     End Sub
 End Class
